@@ -1,0 +1,86 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# next.js build output
+.next/
+out/
+build/
+dist/
+
+# production
+*.tsbuildinfo
+
+# env files (NEVER commit)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# prisma
+# keep schema + migrations, but never commit the seed (contains plaintext admin password)
+prisma/seed.ts
+prisma/seed.js
+prisma/migrations/dev.db*
+
+# database / sqlite
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# vercel
+.vercel
+
+# typescript
+next-env.d.ts
+
+# IDE / editor
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.swp
+*.swo
+
+# OS / user
+Desktop.ini
+ehthumbs.db
+$RECYCLE.BIN/
+
+# uploads / user-generated content (keep code, not data)
+public/uploads/*
+!public/uploads/.gitkeep
+uploads/*
+!uploads/.gitkeep
+
+# logs
+logs/
+*.log
+
+# coverage / test artifacts
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# secrets / keys
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/

@@ -1,0 +1,3 @@
+# Admin Password Placeholder Example
+# Copy this file to prisma/seed.ts and fill in real values before running `npm run db:seed`.
+# Do NOT commit prisma/seed.ts (it is in .gitignore).
