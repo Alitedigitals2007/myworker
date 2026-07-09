@@ -1,5 +1,7 @@
 import Pusher from "pusher";
 import PusherClient from "pusher-js";
+import prisma from "./db";
+import type { InputJsonValue } from "@prisma/client/runtime/library";
 
 // Server-side Pusher instance
 let pusherServer: Pusher | null = null;
@@ -72,7 +74,7 @@ export async function createNotification(params: {
   type: string;
   title: string;
   message: string;
-  data?: Record<string, unknown>;
+  data?: InputJsonValue;
   sendPusher?: boolean;
 }) {
   const { workerId, type, title, message, data, sendPusher = true } = params;
@@ -84,7 +86,7 @@ export async function createNotification(params: {
       type: type as "SALE" | "PAYMENT" | "ANNOUNCEMENT" | "COMPLAINT" | "MESSAGE" | "COMMISSION" | "WORKER_ADDED" | "INVENTORY_ALERT",
       title,
       message,
-      data: data || undefined
+      data
     }
   });
 
@@ -96,5 +98,3 @@ export async function createNotification(params: {
 
   return notification;
 }
-
-import prisma from "./db";

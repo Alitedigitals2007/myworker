@@ -67,7 +67,7 @@ export default function LoginLogsPage() {
 
   useEffect(() => {
     fetchLogs();
-  }, [pagination.page]);
+  }, [pagination.page, fetchLogs]);
 
   const handleFilter = () => {
     setPagination(p => ({ ...p, page: 1 }));

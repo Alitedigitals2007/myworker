@@ -1,10 +1,9 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { DashboardSidebar } from "./_components/sidebar";
-import { MobileBottomNav } from "@/components/shared/mobile-bottom-nav";
 import { Header } from "@/components/shared/header";
 import { MobileAdminNav } from "./_components/mobile-admin-nav";
 
@@ -23,7 +22,7 @@ export default function AdminDashboardLayout({ children }: DashboardLayoutProps)
     );
   }
 
-  if (!session) {
+  if (!session || !session.user) {
     redirect("/login");
   }
 

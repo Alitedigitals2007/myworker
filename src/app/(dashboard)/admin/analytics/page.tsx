@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { LucideTrendingUp, LucideTrendingDown, LucideDollarSign, LucideShoppingCart, LucideUsers, LucidePackage } from "lucide-react";
+import { LucideTrendingUp, LucideTrendingDown, LucideDollarSign, LucideShoppingCart, LucideUsers } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { DataCard } from "@/components/shared/data-card";

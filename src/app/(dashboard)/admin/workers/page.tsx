@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { LucidePlus, LucideSearch, LucideFilter, LucideMoreVertical, LucideUserCheck, LucideUserX } from "lucide-react";
+import { LucidePlus, LucideSearch, LucideMoreVertical, LucideUserX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -19,8 +19,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from "@/components/ui/dialog";
 
 interface Worker {

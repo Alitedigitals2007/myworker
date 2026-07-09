@@ -7,11 +7,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { LucideEye, LucideEyeOff, LucideLock, LucideUser, LucideAlertCircle, LucideCamera } from "lucide-react";
-import { loginSchema } from "@/lib/validations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { z } from "zod";
 
 type WorkerLoginForm = {
   workerId: string;
@@ -19,20 +19,25 @@ type WorkerLoginForm = {
   faceVerified?: boolean;
 };
 
+const workerLoginFormSchema = z.object({
+  workerId: z.string().min(1, "Worker ID is required"),
+  password: z.string().min(1, "Password is required")
+});
+
 export default function WorkerLoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showFaceCapture, setShowFaceCapture] = useState(false);
-  const [isFirstLogin, setIsFirstLogin] = useState(false);
+  const [isFirstLogin] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<WorkerLoginForm>({
-    resolver: zodResolver(loginSchema.pick({ workerId: true, password: true })),
+    resolver: zodResolver(workerLoginFormSchema),
     defaultValues: {
       workerId: "",
       password: ""
@@ -44,7 +49,6 @@ export default function WorkerLoginPage() {
     setError(null);
 
     try {
-      // First verify credentials
       const result = await signIn("credentials", {
         workerId: data.workerId,
         password: data.password,
@@ -56,14 +60,17 @@ export default function WorkerLoginPage() {
         throw new Error(result.error);
       }
 
-      // Check if first login (no face data) - for now skip face verification
       toast.success("Login successful!");
       router.push("/worker");
       router.refresh();
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Login failed";
-      setError(message);
-      toast.error(message);
+      const raw = err instanceof Error ? err.message : "Login failed";
+      const friendly =
+        raw === "WORKER_NOT_FOUND" ? "Worker ID not found. Check your ID and try again." :
+        raw === "INVALID_PASSWORD" ? "Incorrect password. Please try again." :
+        raw;
+      setError(friendly);
+      toast.error(friendly);
     } finally {
       setIsLoading(false);
     }

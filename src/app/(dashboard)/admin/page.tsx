@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { motion } from "framer-motion";
-import { LucideArrowUp, LucideArrowDown, LucideUsers, LucideDollarSign, LucideWarehouse, LucideChartBar, LucidePercent, LucideClock, LucideAlertTriangle, LucideCheckCircle } from "lucide-react";
+import { LucideUsers, LucideDollarSign, LucideWarehouse, LucideChartBar, LucidePercent, LucideClock, LucideAlertTriangle, LucideCheckCircle } from "lucide-react";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { Card } from "@/components/ui/card";
 import { DataCard } from "@/components/shared/data-card";

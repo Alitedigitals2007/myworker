@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { LucideShoppingCart, LucideUser, LucidePackage, LucideCreditCard, LucideCheck, LucideArrowLeft, LucideArrowRight } from "lucide-react";
+import { LucideUser, LucidePackage, LucideCreditCard, LucideCheck, LucideArrowLeft, LucideArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";

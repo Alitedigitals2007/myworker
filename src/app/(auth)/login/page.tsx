@@ -61,9 +61,14 @@ export default function LoginPage() {
       router.push("/admin");
       router.refresh();
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Login failed";
-      setError(message);
-      toast.error(message);
+      const raw = err instanceof Error ? err.message : "Login failed";
+      const friendly =
+        raw === "USER_NOT_FOUND" ? "No admin account found for this email." :
+        raw === "INVALID_PASSWORD" ? "Incorrect password. Please try again." :
+        raw === "CredentialsSignin" ? "Invalid email or password." :
+        raw;
+      setError(friendly);
+      toast.error(friendly);
     } finally {
       setIsLoading(false);
     }

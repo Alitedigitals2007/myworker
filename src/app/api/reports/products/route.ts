@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import prisma from "@/lib/db";
 import { auth } from "@/lib/auth";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await auth();
     if (!session?.user) {
@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
     const reportData = products.map(product => {
       const totalStock = product.variants.reduce((sum, v) => sum + v.stock, 0);
       const stockValue = product.variants.reduce((sum, v) => sum + (v.stock * v.price), 0);
+      const commissionValue = product.commissionValue ?? 0;
 
       return {
         "SKU": product.sku,
@@ -35,7 +36,7 @@ export async function GET(request: NextRequest) {
         "Total Sold": product._count.saleItems,
         "Status": product.status,
         "Commission Type": product.commissionType,
-        "Commission Value": product.commissionValue || product.commissionPercent
+        "Commission Value": commissionValue
       };
     });
 

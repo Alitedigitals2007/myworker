@@ -153,7 +153,7 @@ export default function WorkerProfilePage() {
               <p className="text-center text-muted-foreground py-8">No payments yet</p>
             ) : (
               <div className="space-y-3">
-                {payments.map((payment, index) => (
+                {payments.map((payment) => (
                   <div
                     key={payment.id}
                     className="flex items-center justify-between p-3 rounded-lg border"

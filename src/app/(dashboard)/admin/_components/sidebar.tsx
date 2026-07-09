@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 
 const adminNavItems = [
   { href: "/admin", icon: LucideLayoutDashboard, label: "Dashboard" },

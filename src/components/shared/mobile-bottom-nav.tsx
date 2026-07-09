@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import {
   LucideHome,
   LucideMessageSquare,
-  LucideShoppingCart,
   LucideFileText,
   LucideUser,
   LucidePlus
@@ -21,11 +20,7 @@ const workerNavItems = [
   { href: "/worker/profile", icon: LucideUser, label: "Profile" },
 ];
 
-interface MobileBottomNavProps {
-  workerId?: string;
-}
-
-export function MobileBottomNav({ workerId }: MobileBottomNavProps) {
+export function MobileBottomNav() {
   const pathname = usePathname();
 
   return (

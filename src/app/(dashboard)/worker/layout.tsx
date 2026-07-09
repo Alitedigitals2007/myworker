@@ -21,7 +21,7 @@ export default function WorkerDashboardLayout({ children }: WorkerDashboardLayou
     );
   }
 
-  if (!session) {
+  if (!session || !session.user) {
     redirect("/worker-login");
   }
 
@@ -36,7 +36,7 @@ export default function WorkerDashboardLayout({ children }: WorkerDashboardLayou
       <main className="flex-1 overflow-x-hidden overflow-y-auto pb-24">
         {children}
       </main>
-      <MobileBottomNav workerId={session.user.workerId} />
+      <MobileBottomNav />
     </div>
   );
 }

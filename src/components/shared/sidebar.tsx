@@ -10,8 +10,6 @@ import {
   LucideShoppingCart,
   LucideDollarSign,
   LucideBarChart3,
-  LucideMessageSquare,
-  LucideBell,
   LucideMegaphone,
   LucideFileText,
   LucideSettings,
@@ -22,7 +20,6 @@ import {
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const adminNavItems = [
   { href: "/admin", icon: LucideLayoutDashboard, label: "Dashboard" },

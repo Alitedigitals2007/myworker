@@ -13,7 +13,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   DialogFooter
 } from "@/components/ui/dialog";
 import {
@@ -395,11 +394,13 @@ export default function ProductsPage() {
             {filteredProducts.map((product, index) => {
               const stockStatus = getStockStatus(product);
               return (
-                <motion.Card
+                <motion.div
                   key={product.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
+                >
+                <Card
                   className="group overflow-hidden hover:shadow-lg transition-all cursor-pointer"
                 >
                   {viewMode === "grid" ? (
@@ -462,7 +463,8 @@ export default function ProductsPage() {
                       </div>
                     </div>
                   )}
-                </motion.Card>
+                </Card>
+                </motion.div>
               );
             })}
           </div>

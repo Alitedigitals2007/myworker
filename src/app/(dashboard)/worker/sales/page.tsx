@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { LucidePlus, LucideEye, LucideShoppingCart, LucideClock } from "lucide-react";
+import { LucidePlus, LucideShoppingCart, LucideClock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";

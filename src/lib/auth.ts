@@ -1,11 +1,10 @@
-"use strict";
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "./db";
 import { compare } from "bcryptjs";
 import { loginSchema } from "./validations";
-import { generateWorkerId } from "./utils";
+import { authConfig } from "./auth.config";
 
 async function logLoginAudit(params: {
   userId: string;
@@ -33,12 +32,8 @@ async function logLoginAudit(params: {
   }
 }
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  signIn,
-  signOut,
-} = NextAuth({
+export const config: NextAuthConfig = {
+  ...authConfig,
   adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({
@@ -54,7 +49,7 @@ export const {
 
         const validated = loginSchema.safeParse({
           ...credentials,
-          loginType: credentials.loginType || "admin"
+          loginType: credentials?.loginType || "admin"
         });
 
         if (!validated.success) {
@@ -65,6 +60,9 @@ export const {
         const { loginType } = validated.data;
 
         if (loginType === "worker") {
+          if (!validated.data.workerId) {
+            throw new Error("WORKER_NOT_FOUND");
+          }
           const { workerId, password } = validated.data;
           const worker = await prisma.worker.findUnique({
             where: { workerId },
@@ -121,6 +119,9 @@ export const {
             image: worker.profilePicture
           };
         } else {
+          if (!validated.data.email) {
+            throw new Error("USER_NOT_FOUND");
+          }
           const { email, password } = validated.data;
           const user = await prisma.user.findUnique({ where: { email } });
           if (!user) {
@@ -174,40 +175,15 @@ export const {
         }
       }
     })
-  ],
-  callbacks: {
-    async jwt({ token, user, account }) {
-      if (user) {
-        token.id = user.id;
-        token.role = user.role;
-        if ("workerId" in user) {
-          token.workerId = user.workerId;
-        }
-        token.picture = user.image;
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.id = token.id;
-        session.user.role = token.role;
-        session.user.workerId = token.workerId;
-        session.user.image = token.picture;
-      }
-      return session;
-    }
-  },
-  pages: {
-    signIn: "/login",
-    error: "/login"
-  },
-  session: {
-    strategy: "jwt",
-    maxAge: Number(process.env.AUTH_MAX_AGE) || 2592000,
-    updateAge: Number(process.env.AUTH_UPDATE_AGE) || 86400
-  },
-  secret: process.env.AUTH_SECRET
-});
+  ]
+};
+
+export const {
+  handlers,
+  auth,
+  signIn,
+  signOut,
+} = NextAuth(config);
 
 export async function isAdmin() {
   const session = await auth();

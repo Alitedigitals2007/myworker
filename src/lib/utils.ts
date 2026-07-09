@@ -18,14 +18,15 @@ export function cn(...inputs: ClassValue[]) {
  * @param decimals Number of decimal places (default: 2)
  * @returns Formatted currency string (₦1,000.00)
  */
-export function formatCurrency(value: number, decimals?: number): string {
+export function formatCurrency(value: string | number, decimals?: number): string {
+  const num = typeof value === "string" ? parseFloat(value) : value;
   return new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",
     currencyDisplay: "symbol",
     minimumFractionDigits: decimals ?? 2,
     maximumFractionDigits: decimals ?? 2
-  }).format(value).replace(/₦/, "₦");
+  }).format(num).replace(/₦/, "₦");
 }
 
 /**

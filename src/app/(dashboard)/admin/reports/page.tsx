@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { LucideFileText, LucideDownload, LucideUsers, LucideShoppingCart, LucideDollarSign, LucidePackage, LucideFileSpreadsheet, LucideFile } from "lucide-react";
+import { LucideDownload, LucideUsers, LucideShoppingCart, LucideDollarSign, LucidePackage, LucideFileSpreadsheet, LucideFile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -109,7 +109,7 @@ export default function ReportsPage() {
       window.URL.revokeObjectURL(url);
 
       toast.success("Report exported successfully");
-    } catch (error) {
+    } catch {
       toast.error("Failed to export report");
     } finally {
       setIsExporting(false);

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { LucideSearch, LucideFilter, LucideDownload, LucideRefreshCw, LucideUser, LucidePackage, LucideShoppingCart, LucideDollarSign, LucideMegaphone, LucideAlertTriangle, LucideEdit, LucideTrash2, LucidePlus } from "lucide-react";
+import { LucideSearch, LucideFilter, LucideDownload, LucideRefreshCw, LucideUser, LucidePackage, LucideShoppingCart, LucideDollarSign, LucideMegaphone, LucideAlertTriangle, LucideEdit, LucidePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -90,7 +90,7 @@ export default function ActivityLogsPage() {
 
   useEffect(() => {
     fetchLogs();
-  }, [pagination.page]);
+  }, [pagination.page, fetchLogs]);
 
   const handleFilter = () => {
     setPagination(p => ({ ...p, page: 1 }));
@@ -119,8 +119,6 @@ export default function ActivityLogsPage() {
     a.download = `activity-logs-${formatDate(new Date(), "date").replace(/\s/g, "-")}.csv`;
     a.click();
   };
-
-  const uniqueActions = Array.from(new Set(logs.map(l => l.action)));
 
   return (
     <div className="p-4 md:p-6">

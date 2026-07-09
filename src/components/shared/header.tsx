@@ -10,13 +10,11 @@ import {
   LucideMenu,
   LucideX,
   LucideChevronDown,
-  LucideUser,
   LucideLogOut,
   LucideSettings
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
-import { Input } from "@/components/ui/input";
 import { GlobalSearch } from "./global-search";
 
 interface HeaderProps {

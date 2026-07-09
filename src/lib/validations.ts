@@ -1,6 +1,6 @@
 "use strict";
 import { z } from "zod";
-import { CommissionType, Status, SaleStatus, PaymentStatus, ComplaintStatus, TargetType, MessageType, ChatType, Role, Gender } from '@prisma/client';
+import { CommissionType, Status, ComplaintStatus, TargetType, MessageType, Gender } from "@prisma/client";
 
 // Base schemas
 const phoneSchema = z.string().regex(/^\+?[0-9\s\-\(\)]{10,15}$/, "Invalid phone number");

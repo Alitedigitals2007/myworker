@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { LucideMegaphone, LucidePlus, LucideSearch, LucideUsers, LucideSend } from "lucide-react";
+import { LucideMegaphone, LucidePlus, LucideSend } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";

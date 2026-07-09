@@ -6,8 +6,7 @@ import { motion } from "framer-motion";
 import { LucideSearch, LucideSend, LucidePaperclip, LucideMoreVertical, LucidePhone, LucideVideo, LucideImage, LucideSmile } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { getInitials, formatDate } from "@/lib/utils";
 import toast from "react-hot-toast";
@@ -134,7 +133,7 @@ export default function WorkerChatsPage() {
 
       const sentMessage = await res.json();
       setMessages(prev => prev.map(m => m.id === tempMessage.id ? sentMessage : m));
-    } catch (error) {
+    } catch {
       setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
       toast.error("Failed to send message");
     }

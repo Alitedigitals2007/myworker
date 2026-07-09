@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     }
 
     // For workers, use their workerId
-    let workerId = session.user.workerId;
+    const workerId = session.user.workerId;
 
     if (!workerId && session.user.role !== "SUPER_ADMIN") {
       return NextResponse.json({ error: "Worker ID not found" }, { status: 400 });

@@ -3,7 +3,7 @@
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 import { VariantProps, cva } from "class-variance-authority";
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 
 const cardVariants = cva(
   "border rounded-xl shadow-sm transition-all",
@@ -22,7 +22,9 @@ const cardVariants = cva(
   }
 );
 
-const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof cardVariants>>(
+type CardProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof cardVariants>;
+
+const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ className, variant, children, ...props }, ref) => {
     return variant === "interactive" ? (
       <motion.div
@@ -30,7 +32,7 @@ const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & V
         transition={{ ease: "easeOut", duration: 0.15 }}
         className={cn(cardVariants({ variant, className }))}
         ref={ref}
-        {...props}
+        {...(props as HTMLMotionProps<"div">)}
       >
         {children}
       </motion.div>
